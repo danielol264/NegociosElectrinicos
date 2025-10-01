@@ -1,0 +1,84 @@
+<!-- views/disponibilidad.html -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Disponibilidad — Nuestra Tienda</title>
+  <style>
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:#f7fafc;
+      color:#0f1724;
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:24px;
+    }
+    .card{
+      background:#fff;
+      border-radius:10px;
+      padding:24px;
+      max-width:760px;
+      width:100%;
+      box-shadow:0 6px 18px rgba(2,6,23,0.06);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:12px
+    }
+    th,td{
+      padding:10px;
+      border-bottom:1px solid #e6eaf0;
+      text-align:left
+    }
+    th{
+      background:#f1f5f9;
+      font-weight:700
+    }
+    .note{
+      margin-top:12px;
+      padding:10px;
+      border-left:4px solid #3b82f6;
+      background:#f0f9ff
+    }
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#06b6d4,#3b82f6);
+      color:#fff;
+      font-weight:700
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Disponibilidad de la plataforma</h1>
+
+    <p>Valoramos tu confianza. A continuación mostramos el nivel de disponibilidad comprometido para la plataforma:</p>
+
+    <div style="display:flex;align-items:center;gap:16px;margin-top:8px">
+      <div class="badge" aria-hidden="true">99.9%</div>
+      <div>
+        <strong>Disponibilidad comprometida: 99.9%</strong><br>
+        Equivale a máximo <strong>8 h 45 min</strong> de caída al año.
+      </div>
+    </div>
+
+    <table aria-label="Tabla de SLA">
+      <thead>
+        <tr><th>SLA (%)</th><th>Tiempo máximo de caída al año</th><th>Equivalente aproximado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>99%</td><td>3 días 15 h 36 min</td><td>~1 h/semana</td></tr>
+        <tr><td>99.9%</td><td>8 horas 45 minutos</td><td>&lt;1 h/mes</td></tr>
+        <tr><td>99.99%</td><td>52 minutos</td><td>~4 min/mes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Nota:</strong> El tiempo de inactividad exento por mantenimiento programado se notificará con al menos 48 horas de antelación. Los tiempos indicados corresponden al total acumulado
