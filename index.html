@@ -19,6 +19,22 @@
         </div>
     </header>
 
+
+    <!-- Menú de navegación principal -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#carrito">Carrito</a></li>
+            <li><a href="#usuarios">Usuarios</a></li>
+            <li><a href="#pedidos">Pedidos</a></li>
+            <li><a href="#configuracion">Configuración</a></li>
+            <li><a href="#tecnologia">Tecnología propuesta</a></li>
+            <li><a href="disponibilidad.html">Disponibilidad</a></li>
+        </ul>
+    </nav>
+
+
     <!-- Carrito desplegable -->
     <div id="cart-container" class="cart-container">
         <h3>Carrito de Compras</h3>
@@ -79,28 +95,63 @@
 </div>
             </div>
 
-            <div class="categories" id="categories">
+             <div class="categories" id="catalogo">
                 <div class="category-card" data-price="1000">
-                    <img src="https://via.placeholder.com/100" alt="Componentes">
+                    <img src="src/img/componentes.jpeg" alt="Componentes">
                     <span>Componentes</span>
                     <button class="add-to-cart">Agregar al carrito</button>
                 </div>
                 <div class="category-card" data-price="500">
-                    <img src="https://via.placeholder.com/100" alt="Discos Duros">
+                    <img src="src/img/ssd.jpeg" alt="Discos Duros">
                     <span>Discos Duros / SSD / NAS</span>
                     <button class="add-to-cart">Agregar al carrito</button>
                 </div>
                 <div class="category-card" data-price="300">
-                    <img src="https://via.placeholder.com/100" alt="Memorias RAM">
+                    <img src="src/img/MEMORIA_RAM_2024.avif" alt="Memorias RAM">
                     <span>Memorias RAM y Flash</span>
                     <button class="add-to-cart">Agregar al carrito</button>
                 </div>
                 <div class="category-card" data-price="700">
-                    <img src="https://via.placeholder.com/100" alt="Monitores">
+                    <img src="src/img/monitor.jpeg" alt="Monitores">
                     <span>Monitores</span>
                     <button class="add-to-cart">Agregar al carrito</button>
                 </div>
+                <!-- Nuevos productos -->
+                <div class="category-card" data-price="400">
+                    <img src="src/img/tarjeta de video.jpeg" alt="Tarjeta de Video">
+                    <span>Tarjetas de Video</span>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+                <div class="category-card" data-price="200">
+                    <img src="src/img/fuente de poder.jpeg" alt="Fuente de Poder">
+                    <span>Fuentes de Poder</span>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+                <div class="category-card" data-price="150">
+                    <img src="src/img/gabinete.jpeg" alt="Gabinetes">
+                    <span>Gabinetes</span>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+                <div class="category-card" data-price="250">
+                    <img src="src/img/tarjeta madre.jpeg" alt="Tarjeta Madre">
+                    <span>Tarjetas Madre</span>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
             </div>
+            <!-- Sección Tecnología propuesta -->
+            <section id="tecnologia">
+                <h2>Tecnología propuesta</h2>
+                <p>
+                    Para un proyecto real, montaríamos esta tienda sobre una 
+                    plataforma abierta como <strong>PrestaShop</strong>, que 
+                    nos ofrece flexibilidad, escalabilidad y control total 
+                    de nuestros datos y catálogo.
+                </p>
+                <p>
+                    Nota: en este curso todo se simulará únicamente en 
+                    <em>front-end</em> (HTML, CSS y JS), sin un back-end real.
+                </p>
+            </section>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

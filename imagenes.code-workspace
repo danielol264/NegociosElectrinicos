@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "imagenes",
+			"path": "../Negocios Electronicos/imagenes"
+		},
+		{
+			"name": "NegociosElectrinicos",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

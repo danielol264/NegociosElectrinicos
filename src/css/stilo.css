@@ -51,12 +51,40 @@ header .account-cart div {
     font-weight: bold;
 }
 
-/* Sidebar */
+/* Menú de navegación (NUEVO) */
+nav {
+    background-color: #0056b3;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #00408a;
+    color: #fff;
+}
+
+/* Container principal */
 .container {
     display: flex;
     padding: 20px;
 }
 
+/* Sidebar */
 aside {
     width: 220px;
     background-color: #fff;
@@ -122,6 +150,9 @@ main {
     text-align: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    flex-direction: column; /* NUEVO */
+    display: flex; /* NUEVO */
+    height: 100%; /* NUEVO */
 }
 
 .category-card:hover {
@@ -143,6 +174,7 @@ main {
 }
 
 .category-card button {
+    margin-top: auto; /* NUEVO */
     padding: 8px 15px;
     border: none;
     border-radius: 25px;
@@ -229,4 +261,24 @@ main {
 
 #checkout-btn:hover {
     background-color: #1e7e34;
+}
+
+/* Nueva sección: Tecnología propuesta (NUEVO) */
+#tecnologia {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+#tecnologia h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+#tecnologia p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
 }
