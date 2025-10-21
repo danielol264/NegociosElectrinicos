@@ -1,0 +1,259 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #72a7f7, #0a7ef1);
+  overflow: hidden;
+}
+
+/* CONTENEDOR */
+.contenedor {
+  position: relative;
+  width: 850px;
+  height: 500px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: all 0.9s cubic-bezier(.22, .9, .33, 1);
+  display: flex;
+}
+
+/* PANELES */
+.panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  z-index: 5;
+  transition: transform 0.9s cubic-bezier(.22, .9, .33, 1), opacity 0.6s ease;
+}
+
+.panel-izq {
+  left: 0;
+  background: linear-gradient(to left, #72a7f7, #0a7ef1);
+}
+
+.panel-der {
+  right: 0;
+  background: linear-gradient(to right, #72a7f7, #0a7ef1);
+}
+
+.texto-panel h2 {
+  font-size: 26px;
+  margin-bottom: 0.5rem;
+}
+
+.texto-panel p {
+  font-size: 14px;
+  margin-bottom: 1.2rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.texto-panel button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #fff;
+  color: #0562ee;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.texto-panel button:hover {
+  transform: translateY(-3px);
+}
+
+/* CAJA DE FORMULARIOS */
+.caja-formularios {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.9s cubic-bezier(.22, .9, .33, 1);
+  box-shadow: -6px 0 18px rgba(0, 0, 0, 0.06);
+}
+
+/* FORMULARIOS */
+.formulario {
+  position: absolute;
+  width: 80%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.22, .9, .33, 1);
+  left: 10%;
+}
+
+.formulario h2 {
+  margin-bottom: 1rem;
+  color: #0562ee;
+}
+
+.formulario input {
+  margin-bottom: 1rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.formulario input:focus {
+  border-color: #82b1ff;
+  box-shadow: 0 4px 10px rgba(6, 98, 238, 0.12);
+}
+
+.formulario button {
+  padding: 10px;
+  border: none;
+  background: #0562ee;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.formulario button:hover {
+  transform: translateY(-2px);
+  background: #044db5;
+}
+
+/* Estado inicial */
+.formulario-login {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+
+.formulario-signin {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(30px);
+}
+
+/* Modo Sign In */
+.contenedor.modo-signin .caja-formularios {
+  transform: translateX(-100%);
+}
+
+.contenedor.modo-signin .formulario-login {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-30px);
+}
+
+.contenedor.modo-signin .formulario-signin {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+
+.contenedor.modo-signin .panel-izq {
+  transform: translateX(-15%);
+  opacity: 0.98;
+}
+
+.contenedor.modo-signin .panel-der {
+  transform: translateX(15%);
+  opacity: 0.98;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .contenedor {
+    width: 90%;
+    height: 550px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(to bottom, #72a7f7, #0a7ef1);
+    overflow-y: auto;
+  }
+
+  .contenedor {
+    width: 92%;
+    height: auto;
+    flex-direction: column;
+    border-radius: 15px;
+  }
+
+  /* 🔹 Ocultar paneles para que no se apilen */
+  .panel {
+    display: none;
+  }
+
+  /* 🔹 La caja de formularios ocupa todo el ancho */
+  .caja-formularios {
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .formulario {
+    position: relative;
+    width: 90%;
+    left: 0;
+    max-width: 400px;
+    margin: 40px auto;
+  }
+
+  .formulario h2 {
+    font-size: 22px;
+  }
+
+  .formulario input {
+    font-size: 15px;
+  }
+
+  .formulario button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+  .formulario {
+    width: 95%;
+  }
+
+  .formulario h2 {
+    font-size: 20px;
+  }
+
+  .formulario input,
+  .formulario button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

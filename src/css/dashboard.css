@@ -56,27 +56,6 @@ nav {
     background-color: #0056b3;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px 0;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 6px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #00408a;
-    color: #fff;
-}
 
 /* Container principal */
 .container {
@@ -164,132 +143,151 @@ aside ul li a:hover {
     font-size: 13px;
     padding: 5px 4px 0px 0;
 }
-/* Main content */
-main {
-    flex: 1;
-}
-
-.banner {
-    margin-bottom: 25px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.banner img {
+main{
     width: 100%;
-    display: block;
+}
+/* Main content */
+/* Dashboard full */
+.dashboard-full {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-}
-
-.category-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    flex-direction: column; /* NUEVO */
-    display: flex; /* NUEVO */
-    height: 100%; /* NUEVO */
-}
-
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.category-card img {
-    max-width: 100px;
-    margin-bottom: 10px;
-}
-
-.category-card span {
-    display: block;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 12px;
-    font-size: 16px;
-}
-
-.category-card button {
-    margin-top: auto; /* NUEVO */
-    padding: 8px 15px;
-    border: none;
-    border-radius: 25px;
+/* Menú lateral del dashboard */
+.menu-dashboard-full {
+    width: 220px;
     background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
-.category-card button:hover {
+.menu-dashboard-full button {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-dashboard-full button:hover {
     background-color: #0056b3;
 }
 
-/* Carrito desplegable */
-.cart-container {
-    position: absolute;
-    top: 70px;
-    right: 30px;
-    width: 320px;
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    display: none;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    z-index: 100;
-}
-
-.cart-container h3 {
-    margin-bottom: 15px;
-    color: #007bff;
-    font-size: 18px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-
-.cart-container ul {
-    list-style: none;
-    max-height: 250px;
-    overflow-y: auto;
-    margin-bottom: 15px;
-}
-
-.cart-container ul li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    padding: 5px 0;
-    border-bottom: 1px solid #f1f1f1;
-}
-
-.cart-container ul li button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    padding: 2px 8px;
-    font-size: 12px;
-}
-
-.cart-container ul li button:hover {
-    background-color: #a71d2a;
-}
-
-.cart-container p {
+.menu-dashboard-full button.active {
+    background-color: #0056b3;
     font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 10px;
 }
+
+/* Contenido del dashboard */
+.contenido-dashboard-full {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Secciones */
+.seccion-dashboard-full {
+    display: none;
+    animation: fadeIn 0.4s;
+}
+
+.seccion-dashboard-full.active {
+    display: block;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Tarjetas para formularios y tablas */
+.tarjeta-dashboard {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-top: 15px;
+}
+
+/* Formularios */
+.form-dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-dashboard label {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.form-dashboard input,
+.form-dashboard select {
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 60%;
+}
+
+.form-dashboard button {
+    margin-top: 15px;
+    width: 180px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-dashboard button:hover {
+    background-color: #0056b3;
+}
+
+/* Tabla de pedidos */
+.tabla-dashboard {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-dashboard th,
+.tabla-dashboard td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-dashboard th {
+    background-color: #e9ecef;
+}
+
+/* Estados */
+.estado {
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.entregado { background-color: #28a745; }
+.en-camino { background-color: #ffc107; color: #333; }
+.cancelado { background-color: #dc3545; }
+
+
 
 #checkout-btn {
     width: 100%;
@@ -306,27 +304,4 @@ main {
     text-decoration: none;
     color: #ffff;
     cursor: pointer;
-}
-#checkout-btn:hover {
-    background-color: #1e7e34;
-}
-
-/* Nueva sección: Tecnología propuesta (NUEVO) */
-#tecnologia {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 40px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-#tecnologia h2 {
-    color: #007bff;
-    margin-bottom: 15px;
-}
-
-#tecnologia p {
-    font-size: 15px;
-    line-height: 1.5;
-    color: #333;
 }

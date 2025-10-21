@@ -7,19 +7,17 @@
     <link rel="stylesheet" href="src/css/stilo.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #f0eeee;">
 
     <!-- Header -->
     <header>
         <div class="logo">THE BYTESHOP</div>
         <input type="search" id="search" placeholder="¿Qué necesita su empresa?">
         <div class="account-cart">
-            <div id="account">Acceso a cuenta</div>
+            <div id="account"> <a href="src/views/login.html" class="hypervinculo">Acceso a cuenta</a></div>
             <div id="cart-button">🛒 $<span id="cart-total">0.00</span></div>
         </div>
     </header>
-
-
     <!-- Menú de navegación principal -->
     <nav>
         <ul>
@@ -27,14 +25,19 @@
             <li><a href="#catalogo">Catálogo</a></li>
             <li><a href="#carrito">Carrito</a></li>
             <li><a href="#usuarios">Usuarios</a></li>
-            <li><a href="#pedidos">Pedidos</a></li>
-            <li><a href="#configuracion">Configuración</a></li>
-            <li><a href="#tecnologia">Tecnología propuesta</a></li>
-            <li><a href="disponibilidad.html">Disponibilidad</a></li>
+            <li><a href="#pedidos">Arma tu PC Gamer</a></li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">&#9776;</a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="src/views/disponibilidad.html">Disponibilidad</a></li>
+                <li><a class="dropdown-item" href="src/views/workpres.html">Tecnologias propuestas</a></li>
+                <li><a class="dropdown-item" href="src/views/landing_page.html">LandingPage</a></li>
+                <li><a class="dropdown-item" href="src/views/status.html">Status</a></li>
+                <li><a class="dropdown-item" href="src/views/dashboard.html">Dashboard</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
-
-
     <!-- Carrito desplegable -->
     <div id="cart-container" class="cart-container">
         <h3>Carrito de Compras</h3>
@@ -42,100 +45,118 @@
         <p>Total: $<span id="cart-total-bottom">0.00</span></p>
         <button id="checkout-btn">Ir a pagar</button>
     </div>
-
     <div class="container">
         
         <!-- Sidebar -->
-        <aside>
-            <h3>Componentes</h3>
+        <aside id="sidebar">
+            <h3>Categorias</h3>
             <ul>
-                <li><a href="#">Procesadores</a></li>
-                <li><a href="#">Tarjetas Madre</a></li>
-                <li><a href="#">Tarjetas de Video</a></li>
-                <li><a href="#">Gabinetes</a></li>
-                <li><a href="#">Fuentes de Poder para PC's</a></li>
+                <li><a onclick="categoria('componentes')">Componentes</a></li>
+                <li><a onclick="categoria('DiscoDuro')">Discos duros / SSD</a></li>
+                <li><a onclick="categoria('MemoriaRam')">Merorias RAM</a></li>
+                <li><a onclick="categoria('Monitores')">Monitores</a></li>
+                <li><a onclick="categoria('TarjetasVideo')">Tarjetas de video</a></li>
+                <li><a onclick="categoria('FuentesPoder')">Fuentes de poder</a></li>
+                <li><a onclick="categoria('Gabinetes')">Gabinetes</a></li>
+                <li><a onclick="categoria('TarjetasMadre')">Tarjetas madre</a></li>
             </ul>
-            <h3>Discos Duros / SSD / NAS</h3>
+            <h3>Arma tu PC gamer</h3>
             <ul>
-                <li><a href="#">SSD</a></li>
-                <li><a href="#">Discos Duros Internos para PC</a></li>
-                <li><a href="#">Discos Duros Internos para Laptop</a></li>
+                <li><a href="#">Arma tu Computadora</a></li>
+                <li><a href="#">Consulta el avance de tu pc gamer</a></li>
             </ul>
+            <h3>Soporte</h3>
+            <ul>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Políticas de devolución</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+            <div class="linea"></div>
+            <div id="account"> <a href="src/views/login.html" class="hypervinculo">Acceso a cuenta</a></div>
+            <div class="cuenta">
+                <div class="img-avatar">
+                    <img src="src/img/avatar.png" alt="">
+                </div>
+                <p>javier perez</p>
+                <div class="setting">
+                    <a href="src/views/dashboardoAccount.html"><img src="src/img/settings.png" alt=""></a>
+                </div>
+            </div>
         </aside>
-
         <!-- Main content -->
         <main>
             <div class="banner">
                 <!-- Carrusel -->
-                 <div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="src/img/silla_yay.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="src/img/adata.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="src/img/pc.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img src="src/img/silla_yay.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="src/img/adata.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="src/img/pc.png" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
 
-             <div class="categories" id="catalogo">
+            <div class="categories" id="catalogo">
                 <div class="category-card" data-price="1000">
                     <img src="src/img/componentes.jpeg" alt="Componentes">
                     <span>Componentes</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="500">
                     <img src="src/img/ssd.jpeg" alt="Discos Duros">
                     <span>Discos Duros / SSD / NAS</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="300">
                     <img src="src/img/MEMORIA_RAM_2024.avif" alt="Memorias RAM">
                     <span>Memorias RAM y Flash</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="700">
                     <img src="src/img/monitor.jpeg" alt="Monitores">
                     <span>Monitores</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <!-- Nuevos productos -->
                 <div class="category-card" data-price="400">
                     <img src="src/img/tarjeta de video.jpeg" alt="Tarjeta de Video">
                     <span>Tarjetas de Video</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="200">
                     <img src="src/img/fuente de poder.jpeg" alt="Fuente de Poder">
                     <span>Fuentes de Poder</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="150">
                     <img src="src/img/gabinete.jpeg" alt="Gabinetes">
                     <span>Gabinetes</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
                 <div class="category-card" data-price="250">
                     <img src="src/img/tarjeta madre.jpeg" alt="Tarjeta Madre">
                     <span>Tarjetas Madre</span>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                    <button class="view">Revisar</button>
                 </div>
             </div>
             <!-- Sección Tecnología propuesta -->
@@ -156,5 +177,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="src/js/script.js"></script>
+    <script src="src/js/data.js"></script>
 </body>
 </html>

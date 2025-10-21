@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>categorias</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a class="hypervinculo" href="../../index.html">THE BYTESHOP</a></div>
+        <div class="account-cart">
+            <div id="account"> <a href="src/views/login.html" class="hypervinculo">Acceso a cuenta</a></div>
+        </div>
+    </header>
+    <!-- Menú de navegación principal -->
+    <nav>
+
+    </nav>
+    <div class="container">
+        
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <h3>Categorias</h3>
+            <ul>
+                <li><a onclick="seleccionarCatergoria('componentes')">Componentes</a></li>
+                <li><a onclick="seleccionarCatergoria('DiscoDuro')">Discos duros / SSD</a></li>
+                <li><a onclick="seleccionarCatergoria('MemoriaRam')">Merorias RAM</a></li>
+                <li><a onclick="seleccionarCatergoria('Monitores')">Monitores</a></li>
+                <li><a onclick="seleccionarCatergoria('TarjetasVideo')">Tarjetas de video</a></li>
+                <li><a onclick="seleccionarCatergoria('FuentesPoder')">Fuentes de poder</a></li>
+                <li><a onclick="seleccionarCatergoria('Gabinetes')">Gabinetes</a></li>
+                <li><a onclick="seleccionarCatergoria('TarjetasMadre')">Tarjetas madre</a></li>
+            </ul>
+            <h3>Arma tu PC gamer</h3>
+            <ul>
+                <li><a href="#">Arma tu Computadora</a></li>
+                <li><a href="#">Consulta el avance de tu pc gamer</a></li>
+            </ul>
+            <h3>Soporte</h3>
+            <ul>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Políticas de devolución</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+            <div class="linea"></div>
+            <div class="cuenta">
+                <div class="img-avatar">
+                    <img src="../img/avatar.png" alt="">
+                </div>
+                <p>javier perez</p>
+                <div class="setting">
+                    <a href="../views/dashboardoAccount.html"><img src="../img/settings.png" alt=""></a>
+                </div>
+            </div>
+        </aside>
+        <!-- Main content -->
+<main>
+    <div class="dashboard-full">
+        <!-- Menú lateral del dashboard -->
+        <div class="menu-dashboard-full">
+            <button data-target="perfil" class="active">Mi Perfil</button>
+            <button data-target="pedidos">Pedidos Recientes</button>
+            <button data-target="direccion">Dirección</button>
+            <button data-target="configuracion">Configuración</button>
+        </div>
+
+        <!-- Contenido del dashboard -->
+        <div class="contenido-dashboard-full">
+
+            <!-- Sección: Mi Perfil -->
+            <div id="perfil" class="seccion-dashboard-full active">
+                <h2>Mi Perfil</h2>
+                <div class="tarjeta-dashboard">
+                    <form class="form-dashboard">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" value="Javier Pérez">
+
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" id="email" value="javier@example.com">
+
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono" value="55 1234 5678">
+
+                        <button type="submit" id="guardar-perfil">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sección: Pedidos Recientes -->
+            <div id="pedidos" class="seccion-dashboard-full">
+                <h2>Pedidos Recientes</h2>
+                <div class="tarjeta-dashboard">
+                    <table class="tabla-dashboard">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>00123</td>
+                                <td>Tarjeta Madre ASUS</td>
+                                <td>12/10/2025</td>
+                                <td><span class="estado entregado">Entregado</span></td>
+                            </tr>
+                            <tr>
+                                <td>00124</td>
+                                <td>Monitor Samsung 24"</td>
+                                <td>10/10/2025</td>
+                                <td><span class="estado en-camino">En camino</span></td>
+                            </tr>
+                            <tr>
+                                <td>00125</td>
+                                <td>Memoria RAM 16GB</td>
+                                <td>08/10/2025</td>
+                                <td><span class="estado cancelado">Cancelado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sección: Dirección -->
+            <div id="direccion" class="seccion-dashboard-full">
+                <h2>Dirección de Envío</h2>
+                <div class="tarjeta-dashboard">
+                    <form class="form-dashboard">
+                        <label for="calle">Calle y número:</label>
+                        <input type="text" id="calle" value="Av. Reforma 123">
+
+                        <label for="colonia">Colonia:</label>
+                        <input type="text" id="colonia" value="Centro">
+
+                        <label for="ciudad">Ciudad:</label>
+                        <input type="text" id="ciudad" value="Aguascalientes">
+
+                        <label for="cp">Código Postal:</label>
+                        <input type="text" id="cp" value="20000">
+
+                        <button type="submit" id="guardar-direccion">Guardar dirección</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sección: Configuración -->
+            <div id="configuracion" class="seccion-dashboard-full">
+                <h2>Configuración de la cuenta</h2>
+                <div class="tarjeta-dashboard">
+                    <form class="form-dashboard">
+                        <label for="password">Cambiar contraseña:</label>
+                        <input type="password" id="password">
+
+                        <label for="notificaciones">Notificaciones por correo:</label>
+                        <select id="notificaciones">
+                            <option value="si" selected>Sí</option>
+                            <option value="no">No</option>
+                        </select>
+
+                        <label for="privacidad">Privacidad:</label>
+                        <select id="privacidad">
+                            <option value="publico">Público</option>
+                            <option value="privado" selected>Privado</option>
+                        </select>
+
+                        <button type="submit" id="guardar-config">Guardar configuración</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+
+    </div>
+</body>
+<script src="/src/js/dashboardAccount.js"></script>
+</html>

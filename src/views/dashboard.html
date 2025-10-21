@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../css/dashboardadmin.css">
+</head>
+<body>
+
+<header>
+    <div class="logo"><a class="hypervinculo" href="../../index.html">AdminDash</a></div>
+    <div class="search">
+        <input type="search" placeholder="Buscar usuarios, productos...">
+    </div>
+    <div class="actions">
+        <div class="avatar">
+            <img src="https://i.pravatar.cc/40" alt="Avatar Admin">
+        </div>
+        <span>Admin</span>
+        <button id="toggleSidebar" class="btn btn-ghost">☰</button>
+    </div>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>Menú</h3>
+        <div class="menu">
+            <a href="#"><span>🏠</span> Dashboard</a>
+            <a href="#"><span>👤</span> Usuarios</a>
+            <a href="#"><span>📦</span> Productos</a>
+            <a href="#"><span>🛒</span> Pedidos</a>
+            <a href="#"><span>📊</span> Reportes</a>
+            <a href="#"><span>⚙️</span> Configuración</a>
+        </div>
+        <div class="section small">v1.0.0</div>
+    </aside>
+
+    <main class="content">
+        <!-- Dashboard top / Welcome -->
+        <div class="dashboard-top">
+            <div class="welcome">
+                <div>
+                    <h2 class="title">Bienvenido, Admin</h2>
+                    <p>Resumen de la plataforma y estadísticas rápidas.</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="openModal('userModal')">Agregar Usuario</button>
+                <button class="btn btn-primary" onclick="openModal('productModal')">Agregar Producto</button>
+            </div>
+        </div>
+
+        <!-- Estadísticas rápidas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon users">👤</div>
+                <div class="label">Usuarios</div>
+                <div class="value" id="totalUsers">124</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orders">🛒</div>
+                <div class="label">Pedidos</div>
+                <div class="value" id="totalOrders">89</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon sales">💰</div>
+                <div class="label">Ventas</div>
+                <div class="value" id="totalSales">$23,450</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stock">📦</div>
+                <div class="label">Productos</div>
+                <div class="value" id="totalProducts">56</div>
+            </div>
+        </div>
+
+        <!-- Main Grid: Tabla de gestión y panel de actividad -->
+        <div class="main-grid">
+            <!-- Gestión de usuarios -->
+            <div class="card">
+                <h3>Usuarios</h3>
+                <table class="table" id="userTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas generadas por JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Panel de actividad reciente -->
+            <div class="card">
+                <h3>Actividad Reciente</h3>
+                <ul class="recent-list" id="recentList">
+                    <!-- Items generados por JS -->
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Modales -->
+<div class="modal-backdrop" id="userModal">
+    <div class="modal">
+        <h3>Agregar Usuario</h3>
+        <div class="form">
+            <label>Nombre</label>
+            <input type="text" id="userName">
+            <label>Email</label>
+            <input type="email" id="userEmail">
+            <label>Rol</label>
+            <select id="userRole">
+                <option value="Admin">Admin</option>
+                <option value="Editor">Editor</option>
+                <option value="Cliente">Cliente</option>
+            </select>
+            <div class="card-controls">
+                <button class="btn btn-primary" onclick="addUser()">Agregar</button>
+                <button class="btn btn-ghost" onclick="closeModal('userModal')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop" id="productModal">
+    <div class="modal">
+        <h3>Agregar Producto</h3>
+        <div class="form">
+            <label>Nombre</label>
+            <input type="text" id="productName">
+            <label>Precio</label>
+            <input type="text" id="productPrice">
+            <label>Stock</label>
+            <input type="text" id="productStock">
+            <div class="card-controls">
+                <button class="btn btn-primary" onclick="addProduct()">Agregar</button>
+                <button class="btn btn-ghost" onclick="closeModal('productModal')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

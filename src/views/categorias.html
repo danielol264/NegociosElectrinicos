@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>categorias</title>
+    <link rel="stylesheet" href="../css/stilo.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a class="hypervinculo" href="../../index.html">THE BYTESHOP</a></div>
+        <input type="search" id="search" placeholder="¿Qué necesita su empresa?">
+        <div class="account-cart">
+            <div id="account"> <a href="../views/login.html" class="hypervinculo">Acceso a cuenta</a></div>
+            <div id="cart-button">🛒 $<span id="cart-total">0.00</span></div>
+        </div>
+    </header>
+    <!-- Menú de navegación principal -->
+    <nav>
+
+    </nav>
+    <div id="cart-container" class="cart-container">
+        <h3>Carrito de Compras</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total-bottom">0.00</span></p>
+        <button id="checkout-btn">Ir a pagar</button>
+    </div>
+    <div class="container">
+        
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <h3>Categorias</h3>
+            <ul>
+                <li><a onclick="seleccionarCatergoria('componentes')">Componentes</a></li>
+                <li><a onclick="seleccionarCatergoria('DiscoDuro')">Discos duros / SSD</a></li>
+                <li><a onclick="seleccionarCatergoria('MemoriaRam')">Merorias RAM</a></li>
+                <li><a onclick="seleccionarCatergoria('Monitores')">Monitores</a></li>
+                <li><a onclick="seleccionarCatergoria('TarjetasVideo')">Tarjetas de video</a></li>
+                <li><a onclick="seleccionarCatergoria('FuentesPoder')">Fuentes de poder</a></li>
+                <li><a onclick="seleccionarCatergoria('Gabinetes')">Gabinetes</a></li>
+                <li><a onclick="seleccionarCatergoria('TarjetasMadre')">Tarjetas madre</a></li>
+            </ul>
+            <h3>Arma tu PC gamer</h3>
+            <ul>
+                <li><a href="#">Arma tu Computadora</a></li>
+                <li><a href="#">Consulta el avance de tu pc gamer</a></li>
+            </ul>
+            <h3>Soporte</h3>
+            <ul>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Políticas de devolución</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+            <div class="linea"></div>
+            <div class="cuenta">
+                <div class="img-avatar">
+                    <img src="../img/avatar.png" alt="">
+                </div>
+                <p>javier perez</p>
+                <div class="setting">
+                    <a href="../views/dashboardoAccount.html"><img src="../img/settings.png" alt=""></a>
+                </div>
+            </div>
+        </aside>
+        <!-- Main content -->
+        <main>
+
+            <div class="main-content">
+                <section class="flitro">
+                    putos
+                </section>
+                <div class="categories" id="catalogo">   
+                </div>
+            </div>
+            
+            <section id="tecnologia">
+                <h2>Tecnología propuesta</h2>
+                <p>
+                    Para un proyecto real, montaríamos esta tienda sobre una 
+                    plataforma abierta como <strong>PrestaShop</strong>, que 
+                    nos ofrece flexibilidad, escalabilidad y control total 
+                    de nuestros datos y catálogo.
+                </p>
+                <p>
+                    Nota: en este curso todo se simulará únicamente en 
+                    <em>front-end</em> (HTML, CSS y JS), sin un back-end real.
+                </p>
+            </section>
+        </main>
+    </div>
+</body>
+<script src="/src/js/data.js"></script>
+<script src="/src/js/categorias.js"></script>
+</html>

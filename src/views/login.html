@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login / Sign In - Reversible</title>
+  <link rel="stylesheet" href="/src/css/login.css" />
+</head>
+<body>
+  <div class="contenedor" id="contenedor">
+
+    <!-- PANEL IZQUIERDO -->
+    <div class="panel panel-izq">
+      <div class="texto-panel">
+        <h2>¿Eres nuevo aquí?</h2>
+        <p>Crea una cuenta para comenzar tu experiencia</p>
+        <button id="btnSignIn">Sign In</button>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="panel panel-der">
+      <div class="texto-panel">
+        <h2>¿Ya tienes cuenta?</h2>
+        <p>Inicia sesión con tus credenciales</p>
+        <button id="btnLogin">Login</button>
+      </div>
+    </div>
+
+    <!-- CAJA DE FORMULARIOS (INICIA EN LA MITAD DERECHA) -->
+    <div class="caja-formularios">
+      <!-- FORMULARIO LOGIN (visible inicialmente) -->
+      <form class="formulario formulario-login" id="formLogin">
+        <h2>Iniciar Sesión</h2>
+        <input id="usuario" type="text" placeholder="Usuario" />
+        <input id="password" type="password" placeholder="Contraseña"/>
+        <button type="button" onclick="login()">Entrar</button>
+      </form>
+
+      <!-- FORMULARIO SIGN IN (oculto inicialmente) -->
+      <form class="formulario formulario-signin" id="formSignIn">
+        <h2>Crear Cuenta</h2>
+        <input id="newName" type="text" placeholder="Nombre completo"/>
+        <input id="newUsuario" type="email" placeholder="Correo electrónico" />
+        <input id="newPassword" type="password" placeholder="Contraseña" />
+        <button type="button" onclick="signin()">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+  </script>
+</body>
+<script src="../js/user.js"></script>
+<script src="../js/login.js"></script>
+</html>

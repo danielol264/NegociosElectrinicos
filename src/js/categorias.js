@@ -1,6 +1,33 @@
-const { href } = require("react-router-dom");
+// Obtener la categoría seleccionada desde localStorage
+let categoriaSeleccionada = localStorage.getItem("categoria");
 
-// Elementos
+let prueba = window.DB;
+console.log(prueba);
+// Buscar la categoría en tu DB
+let categoria = window.DB.categories.find(cat => cat.id === categoriaSeleccionada);
+console.log(categoria);
+// Obtener el contenedor
+const contenedor = document.getElementById("catalogo");
+
+if (categoria) {
+    categoria.items.forEach(item => {
+        // Crear tarjeta
+        const card = document.createElement("div");
+        card.classList.add("category-card");
+
+        card.innerHTML = `
+            <img src="${item.img || 'img/default.png'}" alt="${item.brand}">
+            <span>${item.model}</span>
+            <p>Precio: $${item.price}</p>
+            <button class="add-to-cart">Agregar</button>
+        `;
+
+        contenedor.appendChild(card);
+    });
+} else {
+    contenedor.innerHTML = "<p>No se encontró la categoría.</p>";
+}
+
 const searchInput = document.getElementById('search');
 const categories = document.querySelectorAll('.category-card');
 const cartTotal = document.getElementById('cart-total');
@@ -10,27 +37,6 @@ const cartContainer = document.getElementById('cart-container');
 const cartButton = document.getElementById('cart-button');
 
 let cart = {};
-// Revisar si hay usuario logueado
-const accountLink = document.getElementById('account');
-const cuentaDiv = document.querySelector('.cuenta');
-
-// Obtener el id del usuario logueado
-const userId = localStorage.getItem('user');
-
-if (userId) {
-    accountLink.style.display = 'none';
-    cuentaDiv.style.display = 'block';
-
-    // Opcional: mostrar el nombre del usuario
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    const user = usuarios.find(u => u.id == userId);
-    if(user){
-        cuentaDiv.querySelector('p').textContent = user.nombre;
-    }
-} else {
-    accountLink.style.display = 'block';
-    cuentaDiv.style.display = 'none';
-}
 
 // Buscar
 searchInput.addEventListener('input', function() {
@@ -112,10 +118,7 @@ function updateCart() {
         });
     });
 }
-// src/js/script.js
-
-function categoria (categorias){
+function seleccionarCatergoria (categorias){
     window.localStorage.setItem("categoria", categorias);
-    window.location.href = "src/views/categorias.html";
+    window.location.reload();
 }
-
