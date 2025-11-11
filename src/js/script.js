@@ -1,4 +1,3 @@
-const { href } = require("react-router-dom");
 
 // Elementos
 const searchInput = document.getElementById('search');
@@ -9,30 +8,7 @@ const cartItems = document.getElementById('cart-items');
 const cartContainer = document.getElementById('cart-container');
 const cartButton = document.getElementById('cart-button');
 
-let cart = {};
-// Revisar si hay usuario logueado
-const accountLink = document.getElementById('account');
-const cuentaDiv = document.querySelector('.cuenta');
-
-// Obtener el id del usuario logueado
-const userId = localStorage.getItem('user');
-
-if (userId) {
-    accountLink.style.display = 'none';
-    cuentaDiv.style.display = 'block';
-
-    // Opcional: mostrar el nombre del usuario
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    const user = usuarios.find(u => u.id == userId);
-    if(user){
-        cuentaDiv.querySelector('p').textContent = user.nombre;
-    }
-} else {
-    accountLink.style.display = 'block';
-    cuentaDiv.style.display = 'none';
-}
-
-// Buscar
+// Buscador
 searchInput.addEventListener('input', function() {
     const query = this.value.toLowerCase();
     categories.forEach(category => {
@@ -60,62 +36,3 @@ categories.forEach(category => {
         updateCart();
     });
 });
-
-// Actualizar carrito
-function updateCart() {
-    cartItems.innerHTML = '';
-    let total = 0;
-
-    for (let key in cart) {
-        const item = cart[key];
-        total += item.price * item.quantity;
-
-        const li = document.createElement('li');
-
-        li.innerHTML = `
-            <div class="item-header">
-                <span>${item.name} - $${(item.price * item.quantity).toFixed(2)}</span>
-                <button data-key="${key}">Eliminar</button>
-            </div>
-            <div class="quantity-controls">
-                <label>Cantidad:</label>
-                <input type="number" min="1" value="${item.quantity}" data-key="${key}" />
-            </div>
-        `;
-
-        cartItems.appendChild(li);
-    }
-
-    cartTotal.textContent = total.toFixed(2);
-    cartTotalBottom.textContent = total.toFixed(2);
-
-    // Botón eliminar
-    const removeButtons = cartItems.querySelectorAll('button');
-    removeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const key = btn.getAttribute('data-key');
-            delete cart[key];
-            updateCart();
-        });
-    });
-
-    // Control de cantidad
-    const quantityInputs = cartItems.querySelectorAll('input[type="number"]');
-    quantityInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            const key = input.getAttribute('data-key');
-            const newQty = parseInt(input.value);
-            if (newQty >= 1) {
-                cart[key].quantity = newQty;
-                updateCart();
-            }
-        });
-    });
-}
-// src/js/script.js
-
-function categoria (categorias){
-    window.localStorage.setItem("categoria", categorias);
-    window.location.href = "src/views/categorias.html";
-}
-

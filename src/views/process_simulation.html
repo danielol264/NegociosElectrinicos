@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Simulación: Flujo de Pedido</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --accent:#007bff;
+    --muted:#6b7280;
+    --white:#111827;
+  }
+  body{
+    font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+    margin:0;
+    background:linear-gradient(180deg,#e9eff8 0%, #f4f7fb 100%);
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  .container{max-width:1000px; margin:32px auto; padding:20px;}
+  header{display:flex; align-items:center; gap:16px; margin-bottom:20px}
+  header h1{font-size:20px; margin:0}
+  .layout{display:grid; grid-template-columns: 1fr 360px; gap:20px;}
+  .card{
+    background:var(--card);
+    border:1px solid #dbe2eb;
+    padding:18px;
+    border-radius:12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  }
+
+  /* Stepper */
+  .stepper{display:flex; gap:12px; justify-content:space-between; margin-bottom:16px}
+  .step{flex:1; min-width:0; text-align:center; padding:12px; border-radius:10px; position:relative}
+  .step .dot{
+    width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:#f3f4f6;color:var(--muted);
+    border:2px solid #e5e7eb;margin-bottom:8px
+  }
+  .step.active .dot{
+    background:linear-gradient(90deg,var(--accent),#00b7ff);
+    color:#fff; border-color:transparent;
+  }
+  .step .label{font-size:13px;color:var(--muted); display:block}
+  .step.active .label{color:var(--white); font-weight:600}
+  .step::after{content:""; position:absolute; right:-6px; top:18px; height:2px; width:12px; background:#dbe2eb}
+  .step:last-child::after{display:none}
+
+  /* Form */
+  form{display:grid; gap:10px}
+  label{font-size:13px; color:var(--muted)}
+  input,select,button,textarea{
+    width:100%; padding:10px 12px;
+    border-radius:8px; border:1px solid #d1d5db;
+    background:#f9fafb; color:var(--white); outline:none
+  }
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--accent); box-shadow:0 0 0 2px rgba(0,123,255,0.2);
+  }
+  .row{display:grid; grid-template-columns: 1fr 1fr; gap:8px}
+  .muted{color:var(--muted); font-size:13px}
+  .actions{display:flex; gap:8px; margin-top:8px}
+  button.primary{
+    background:linear-gradient(90deg,var(--accent),#00b7ff);
+    color:#fff; border:none; cursor:pointer;
+    transition:all .2s;
+  }
+  button.primary:hover{opacity:.9}
+  button.ghost{
+    background:transparent;
+    border:1px solid #cbd5e1;
+    color:var(--white); cursor:pointer;
+  }
+
+  /* Tracking */
+  .tracking{display:flex; flex-direction:column; gap:12px}
+  .track-item{display:flex; gap:12px; align-items:flex-start}
+  .track-dot{width:12px;height:12px;border-radius:50%; background:#d1d5db; margin-top:6px}
+  .track-dot.done{background:var(--accent)}
+  .track-body .time{font-size:12px;color:var(--muted)}
+  .small{font-size:13px;color:var(--muted)}
+  footer{margin-top:18px; font-size:12px; color:var(--muted)}
+  @media (max-width:940px){ .layout{grid-template-columns:1fr; } .row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style="opacity:0.95"><path d="M3 3h18v2H3zM6 7h12l-1.2 10.2A2 2 0 0 1 14.8 19H9.2a2 2 0 0 1-1.999-1.8L6 7z" fill="var(--accent)"></path></svg>
+      <div>
+        <h1>Simulación visual: Flujo de pedido</h1>
+        <div class="small">Formulario + Progreso + Seguimiento — integrado para pruebas</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Left: flow visual + form -->
+      <div class="card">
+        <div id="stepper" class="stepper" aria-hidden="false">
+          <div class="step active" data-step="1">
+            <div class="dot">1</div>
+            <span class="label">Seleccionar</span>
+          </div>
+          <div class="step" data-step="2">
+            <div class="dot">2</div>
+            <span class="label">Pago</span>
+          </div>
+          <div class="step" data-step="3">
+            <div class="dot">3</div>
+            <span class="label">Preparación</span>
+          </div>
+          <div class="step" data-step="4">
+            <div class="dot">4</div>
+            <span class="label">Envío</span>
+          </div>
+          <div class="step" data-step="5">
+            <div class="dot">5</div>
+            <span class="label">Entregado</span>
+          </div>
+        </div>
+
+        <section style="margin-bottom:12px">
+          <h3 style="margin:0 0 8px 0">Formulario de pedido (simulado)</h3>
+          <form id="orderForm" onsubmit="return false">
+            <label>Producto</label>
+            <select id="product" required>
+              <option value="Laptop Pro 14">Laptop Pro 14 — 999 USD</option>
+              <option value="Repuesto GPU">Repuesto GPU — 149 USD</option>
+              <option value="Accesorios">Accesorios — 29 USD</option>
+            </select>
+
+            <div class="row">
+              <div>
+                <label>Nombre</label>
+                <input id="name" placeholder="Nombre del cliente" required />
+              </div>
+              <div>
+                <label>Teléfono / Email</label>
+                <input id="contact" placeholder="correo@ejemplo.com" required />
+              </div>
+            </div>
+
+            <label>Dirección de envío</label>
+            <input id="address" placeholder="Calle, ciudad, CP" required />
+
+            <div class="row">
+              <div>
+                <label>Método de pago</label>
+                <select id="payMethod">
+                  <option>Tarjeta</option>
+                  <option>Transferencia</option>
+                  <option>Pago en entrega</option>
+                </select>
+              </div>
+              <div>
+                <label>Cantidad</label>
+                <input id="qty" type="number" min="1" value="1" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" id="btnCreate">Crear pedido y pagar</button>
+              <button class="ghost" id="btnReset" type="button">Reset</button>
+            </div>
+          </form>
+        </section>
+
+        <section style="border-top:1px dashed #e5e7eb; padding-top:12px">
+          <h3 style="margin:0 0 8px 0">Registro del pedido</h3>
+          <div id="orderSummary" class="muted">Aún no hay pedidos. Crea uno para ver la simulación.</div>
+        </section>
+      </div>
+
+      <!-- Right: tracking -->
+      <aside class="card">
+        <h3 style="margin:0 0 12px 0">Seguimiento</h3>
+        <div class="small" style="margin-bottom:8px">Introduce un número de guía o crea un pedido para simular el trazado.</div>
+
+        <div style="display:flex; gap:8px; margin-bottom:8px">
+          <input id="trackInput" placeholder="Ej: TRK-1234" />
+          <button class="primary" id="btnTrack">Buscar</button>
+        </div>
+
+        <div id="trackingArea" class="tracking">
+          <div class="muted">No hay seguimiento activo.</div>
+        </div>
+
+        <footer>
+          <div class="small">Esta es una <strong>simulación visual</strong>. Los estados y tiempos son ficticios para propósitos demostrativos.</div>
+        </footer>
+      </aside>
+    </div>
+  </div>
+
+<!-- JS idéntico al original -->
+<script>
+/* --- Simulación simple del flujo de pedido --- */
+const stepper = document.getElementById('stepper');
+const steps = Array.from(stepper.querySelectorAll('.step'));
+const orderSummary = document.getElementById('orderSummary');
+const trackingArea = document.getElementById('trackingArea');
+
+function setActiveStep(n){
+  steps.forEach(s => {
+    const idx = Number(s.dataset.step);
+    s.classList.toggle('active', idx === n);
+  });
+}
+
+function randInt(max){ return Math.floor(Math.random()*max); }
+function genTracking(){ return 'TRK-' + Math.random().toString(36).slice(2,8).toUpperCase(); }
+
+let currentOrder = null;
+
+document.getElementById('btnCreate').addEventListener('click', ()=> {
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const product = document.getElementById('product').value;
+  const qty = Number(document.getElementById('qty').value) || 1;
+  const pay = document.getElementById('payMethod').value;
+
+  if(!name || !contact || !address){
+    alert('Por favor completa nombre, contacto y dirección.');
+    return;
+  }
+
+  const tracking = genTracking();
+  currentOrder = {
+    id: 'ORD-' + Date.now().toString().slice(-6),
+    name, contact, address, product, qty, pay, tracking, state: 'Pago pendiente'
+  };
+
+  orderSummary.innerHTML = `
+    <div><strong>ID:</strong> ${currentOrder.id}</div>
+    <div><strong>Producto:</strong> ${currentOrder.product} x${currentOrder.qty}</div>
+    <div><strong>Método:</strong> ${currentOrder.pay}</div>
+    <div><strong>Guía:</strong> <code>${currentOrder.tracking}</code></div>
+    <div class="small" style="margin-top:6px">Estado: <strong id="stateLabel">${currentOrder.state}</strong></div>
+  `;
+
+  runOrderFlow(currentOrder);
+});
+
+document.getElementById('btnReset').addEventListener('click', ()=>{
+  document.getElementById('orderForm').reset();
+  orderSummary.innerHTML = 'Aún no hay pedidos. Crea uno para ver la simulación.';
+  trackingArea.innerHTML = '<div class="muted">No hay seguimiento activo.</div>';
+  currentOrder = null;
+  setActiveStep(1);
+});
+
+function runOrderFlow(order){
+  setActiveStep(1);
+  updateTracking(order.tracking, 'Pedido creado', new Date());
+
+  setTimeout(()=> {
+    order.state = 'Pago validado';
+    document.getElementById('stateLabel').innerText = order.state;
+    setActiveStep(2);
+    updateTracking(order.tracking, 'Pago validado', new Date());
+  }, 800);
+
+  setTimeout(()=> {
+    order.state = 'En preparación';
+    document.getElementById('stateLabel').innerText = order.state;
+    setActiveStep(3);
+    updateTracking(order.tracking, 'En preparación', new Date());
+  }, 1700);
+
+  setTimeout(()=> {
+    order.state = 'Enviado';
+    document.getElementById('stateLabel').innerText = order.state;
+    setActiveStep(4);
+    updateTracking(order.tracking, 'En tránsito - recogido por paquetería', new Date());
+  }, 3000);
+
+  setTimeout(()=> {
+    order.state = 'Entregado';
+    document.getElementById('stateLabel').innerText = order.state;
+    setActiveStep(5);
+    updateTracking(order.tracking, 'Entregado - firma recibida', new Date());
+  }, 5000);
+}
+
+function updateTracking(trk, message, when){
+  if(trackingArea.querySelector('.muted')) trackingArea.innerHTML = '';
+  const item = document.createElement('div');
+  item.className = 'track-item';
+  item.innerHTML = `
+    <div class="track-dot done"></div>
+    <div class="track-body">
+      <div style="font-weight:600">${message}</div>
+      <div class="time">${when.toLocaleString()}</div>
+      <div class="small" style="margin-top:6px">Guía: <code>${trk}</code></div>
+    </div>
+  `;
+  trackingArea.prepend(item);
+}
+
+document.getElementById('btnTrack').addEventListener('click', ()=>{
+  const q = document.getElementById('trackInput').value.trim();
+  if(!q){
+    alert('Ingresa un número de guía (p. ej. TRK-AB12). O crea un pedido para autogenerar guías.');
+    return;
+  }
+
+  trackingArea.innerHTML = '';
+  if(currentOrder && currentOrder.tracking === q){
+    updateTracking(q, 'Entregado (registro real del pedido actual)', new Date());
+    updateTracking(q, 'En tránsito - salida de centro', new Date(Date.now()-3600*1000));
+    updateTracking(q, 'Pago validado', new Date(Date.now()-7200*1000));
+  } else {
+    updateTracking(q, 'En tránsito - demo', new Date());
+    updateTracking(q, 'Recibido por paquetería - demo', new Date(Date.now()-3600*1000));
+  }
+});
+</script>
+</body>
+</html>
