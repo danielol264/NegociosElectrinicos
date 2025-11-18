@@ -48,7 +48,18 @@
         <button id="checkout-btn">Ir a pagar</button>
     </div>
     <div class="container">
-        
+        <div class="modal-overlay" id="cookieModal">
+    <div class="modal-overlay" id="cookieModal">
+    <div class="modal">
+      <h2>Usamos Cookies y Caché</h2>
+      <p>
+        Este sitio utiliza cookies y almacenamiento en caché para mejorar tu experiencia.
+        Al continuar, aceptas su uso según nuestra política de privacidad.
+      </p>
+      <button id="acceptCookies">Aceptar</button>
+    </div>
+  </div>
+  </div>
         <!-- Sidebar -->
         <aside id="sidebar">
             <h3>Categorias</h3>
@@ -209,7 +220,23 @@
         <p style="margin-top:15px; font-size:14px; color:#aaa;">© 2025 THE BYTESHOP - Sitio educativo simulado</p>
     </div>
 </footer>
+<script>
+    const modal = document.getElementById('cookieModal');
+    const acceptBtn = document.getElementById('acceptCookies');
 
+    // Mostrar el modal si el usuario no ha aceptado aún
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('cookiesAccepted')) {
+        modal.classList.add('active');
+      }
+    });
+
+    // Al hacer clic en Aceptar
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('cookiesAccepted', 'true');
+      modal.classList.remove('active');
+    });
+  </script>
 
 </body>
 </html>

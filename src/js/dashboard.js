@@ -79,6 +79,34 @@ function deleteUser(id){
         renderUsers();
     }
 }
+function showSection(sectionId){
+  document.querySelectorAll('.section-content').forEach(sec => sec.style.display = 'none');
+  document.getElementById(sectionId).style.display = 'block';
+}
+
+// Inicial: mostrar dashboard
+showSection('dashboard');
+
+// Gráfico (Chart.js)
+const ctx = document.getElementById('weeklyChart');
+if (ctx) {
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+      datasets: [{
+        label: 'Pedidos',
+        data: [50, 70, 85, 100, 120, 90, 60],
+        backgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
 
 // Agregar producto
 function addProduct(){

@@ -5,149 +5,243 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="../css/dashboardadmin.css">
+<style>
+/* Incluyo el CSS directamente para que sea autónomo */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif;}
+:root{
+  --primary:#007bff;--primary-dark:#0056b3;--accent:#28a745;--danger:#dc3545;
+  --bg:#f0f2f5;--text:#333;--muted:#777;--card-bg:#fff;--shadow:0 6px 18px rgba(0,0,0,0.07);
+}
+body{background:var(--bg);color:var(--text);}
+header{background:var(--primary);color:#fff;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;}
+header .search input{width:60%;padding:8px 14px;border-radius:25px;border:none;}
+.container{display:flex;gap:20px;padding:22px;}
+.sidebar{width:250px;background:var(--card-bg);padding:18px;border-radius:10px;box-shadow:var(--shadow);}
+.sidebar .menu a{display:flex;align-items:center;gap:10px;padding:10px;text-decoration:none;color:#444;border-radius:8px;font-weight:600;}
+.sidebar .menu a:hover,.sidebar .menu a.active{color:var(--primary);background:rgba(0,123,255,0.06);}
+main{flex:1;}
+.card{background:var(--card-bg);padding:18px;border-radius:10px;box-shadow:var(--shadow);}
+.btn{padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:700;}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-ghost{background:#eee;}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;}
+.modal{background:#fff;padding:20px;border-radius:10px;max-width:500px;width:90%;}
+/* content sections */
+.section-content{display:none;}
+.section-content.active{display:block;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;}
+.stat-card{background:#fff;padding:14px;border-radius:10px;box-shadow:var(--shadow);}
+.chart-area{height:250px;display:flex;align-items:center;justify-content:center;border:1px dashed #ccc;border-radius:10px;color:var(--muted);}
+</style>
 </head>
 <body>
 
 <header>
-    <div class="logo"><a class="hypervinculog" href="../../index.html">AdminDash</a></div>
-    <div class="search">
-        <input type="search" placeholder="Buscar usuarios, productos...">
-    </div>
-    <div class="actions">
-        <div class="avatar">
-            <img src="https://i.pravatar.cc/40" alt="Avatar Admin">
-        </div>
-        <span>Admin</span>
-        <button id="toggleSidebar" class="btn btn-ghost">☰</button>
-    </div>
+  <div class="logo"><a class="hypervinculog" href="../../index.html" style="color:white;text-decoration:none;">AdminDash</a></div>
+  <div class="search"><input type="search" placeholder="Buscar usuarios, productos..."></div>
+  <div class="actions">
+    <div class="avatar"><img src="https://i.pravatar.cc/40" style="border-radius:50%;" alt="Admin"></div>
+    <span>Admin</span>
+    <button id="toggleSidebar" class="btn btn-ghost">☰</button>
+  </div>
 </header>
 
 <div class="container">
-    <aside class="sidebar">
-        <h3>Menú</h3>
-        <div class="menu">
-            <a href="#"><span>🏠</span> Dashboard</a>
-            <a href="#"><span>👤</span> Usuarios</a>
-            <a href="#"><span>📦</span> Productos</a>
-            <a href="#"><span>🛒</span> Pedidos</a>
-            <a href="#"><span>📊</span> Reportes</a>
-            <a href="#"><span>⚙️</span> Configuración</a>
-        </div>
-        <div class="section small">v1.0.0</div>
-    </aside>
+  <aside class="sidebar">
+    <h3>Menú</h3>
+    <div class="menu">
+      <a href="#" data-section="dashboard" class="active"><span>🏠</span> Dashboard</a>
+      <a href="#" data-section="usuarios"><span>👤</span> Usuarios</a>
+      <a href="#" data-section="productos"><span>📦</span> Productos</a>
+      <a href="#" data-section="pedidos"><span>🛒</span> Pedidos</a>
+      <a href="#" data-section="reportes"><span>📊</span> Reportes</a>
+      <a href="#" data-section="metricas"><span>📈</span> Métricas</a>
+      <a href="#" data-section="configuracion"><span>⚙️</span> Configuración</a>
+    </div>
+    <div class="section small">v1.1.0</div>
+  </aside>
 
-    <main class="content">
-        <!-- Dashboard top / Welcome -->
-        <div class="dashboard-top">
-            <div class="welcome">
-                <div>
-                    <h2 class="title">Bienvenido, Admin</h2>
-                    <p>Resumen de la plataforma y estadísticas rápidas.</p>
-                </div>
-            </div>
-            <div class="controls">
-                <button class="btn btn-primary" onclick="openModal('userModal')">Agregar Usuario</button>
-                <button class="btn btn-primary" onclick="openModal('productModal')">Agregar Producto</button>
-            </div>
-        </div>
+  <main class="content">
+    <!-- Secciones dinámicas -->
+    <section id="dashboard" class="section-content active">
+      <h2>Panel General</h2>
+      <p>Resumen general del sistema con datos clave.</p>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>Usuarios</h3><p>124 registrados</p></div>
+        <div class="stat-card"><h3>Pedidos</h3><p>89 activos</p></div>
+        <div class="stat-card"><h3>Ventas</h3><p>$23,450</p></div>
+        <div class="stat-card"><h3>Productos</h3><p>56 disponibles</p></div>
+      </div>
+    </section>
 
-        <!-- Estadísticas rápidas -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon users">👤</div>
-                <div class="label">Usuarios</div>
-                <div class="value" id="totalUsers">124</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon orders">🛒</div>
-                <div class="label">Pedidos</div>
-                <div class="value" id="totalOrders">89</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon sales">💰</div>
-                <div class="label">Ventas</div>
-                <div class="value" id="totalSales">$23,450</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon stock">📦</div>
-                <div class="label">Productos</div>
-                <div class="value" id="totalProducts">56</div>
-            </div>
-        </div>
+    <section id="usuarios" class="section-content">
+      <h2>Gestión de Usuarios</h2>
+      <button class="btn btn-primary" onclick="openModal('userModal')">Agregar Usuario</button>
+      <table id="userTable" style="width:100%;margin-top:10px;border-collapse:collapse;">
+        <thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Acciones</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
 
-        <!-- Main Grid: Tabla de gestión y panel de actividad -->
-        <div class="main-grid">
-            <!-- Gestión de usuarios -->
-            <div class="card">
-                <h3>Usuarios</h3>
-                <table class="table" id="userTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Filas generadas por JS -->
-                    </tbody>
-                </table>
-            </div>
+    <section id="productos" class="section-content">
+      <h2>Gestión de Productos</h2>
+      <button class="btn btn-primary" onclick="openModal('productModal')">Agregar Producto</button>
+      <div id="productList" style="margin-top:10px;"></div>
+    </section>
 
-            <!-- Panel de actividad reciente -->
-            <div class="card">
-                <h3>Actividad Reciente</h3>
-                <ul class="recent-list" id="recentList">
-                    <!-- Items generados por JS -->
-                </ul>
-            </div>
-        </div>
-    </main>
+    <section id="pedidos" class="section-content">
+      <h2>Pedidos</h2>
+      <p>Listado de pedidos simulados.</p>
+      <ul id="orderList"></ul>
+    </section>
+
+    <section id="reportes" class="section-content">
+      <h2>Reportes</h2>
+      <div class="chart-area">[ Gráfica de Reportes Placeholder ]</div>
+    </section>
+
+    <section id="metricas" class="section-content">
+      <h2>Métricas de Plataforma</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>Tiempo Activo</h3><p>99.9%</p></div>
+        <div class="stat-card"><h3>Usuarios Nuevos</h3><p>32 hoy</p></div>
+        <div class="stat-card"><h3>Ventas Promedio</h3><p>$350/día</p></div>
+        <div class="stat-card"><h3>Tráfico</h3><p>2,340 visitas</p></div>
+      </div>
+      <div class="chart-area" style="margin-top:20px;">📈 Aquí puedes integrar una gráfica (por ejemplo con Chart.js)</div>
+    </section>
+
+    <section id="configuracion" class="section-content">
+      <h2>Configuración</h2>
+      <p>Opciones de cuenta, sistema y preferencias.</p>
+    </section>
+  </main>
 </div>
 
 <!-- Modales -->
-<div class="modal-backdrop" id="userModal">
-    <div class="modal">
-        <h3>Agregar Usuario</h3>
-        <div class="form">
-            <label>Nombre</label>
-            <input type="text" id="userName">
-            <label>Email</label>
-            <input type="email" id="userEmail">
-            <label>Rol</label>
-            <select id="userRole">
-                <option value="Admin">Admin</option>
-                <option value="Editor">Editor</option>
-                <option value="Cliente">Cliente</option>
-            </select>
-            <div class="card-controls">
-                <button class="btn btn-primary" onclick="addUser()">Agregar</button>
-                <button class="btn btn-ghost" onclick="closeModal('userModal')">Cancelar</button>
-            </div>
-        </div>
+<div id="userModal" class="modal-backdrop">
+  <div class="modal">
+    <h3>Agregar Usuario</h3>
+    <label>Nombre</label><input type="text" id="userName">
+    <label>Email</label><input type="email" id="userEmail">
+    <label>Rol</label>
+    <select id="userRole">
+      <option value="Admin">Admin</option>
+      <option value="Editor">Editor</option>
+      <option value="Cliente">Cliente</option>
+    </select>
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn btn-primary" onclick="addUser()">Agregar</button>
+      <button class="btn btn-ghost" onclick="closeModal('userModal')">Cancelar</button>
     </div>
+  </div>
 </div>
 
-<div class="modal-backdrop" id="productModal">
-    <div class="modal">
-        <h3>Agregar Producto</h3>
-        <div class="form">
-            <label>Nombre</label>
-            <input type="text" id="productName">
-            <label>Precio</label>
-            <input type="text" id="productPrice">
-            <label>Stock</label>
-            <input type="text" id="productStock">
-            <div class="card-controls">
-                <button class="btn btn-primary" onclick="addProduct()">Agregar</button>
-                <button class="btn btn-ghost" onclick="closeModal('productModal')">Cancelar</button>
-            </div>
-        </div>
+<div id="productModal" class="modal-backdrop">
+  <div class="modal">
+    <h3>Agregar Producto</h3>
+    <label>Nombre</label><input type="text" id="productName">
+    <label>Precio</label><input type="text" id="productPrice">
+    <label>Stock</label><input type="text" id="productStock">
+    <div style="margin-top:10px;display:flex;gap:10px;">
+      <button class="btn btn-primary" onclick="addProduct()">Agregar</button>
+      <button class="btn btn-ghost" onclick="closeModal('productModal')">Cancelar</button>
     </div>
+  </div>
 </div>
 
-<script src="../js/dashboard.js"></script>
+<script>
+// Sidebar toggle
+document.getElementById('toggleSidebar').addEventListener('click',()=>{
+  const sb=document.querySelector('.sidebar');
+  sb.style.display=(sb.style.display==='none')?'block':'none';
+});
+
+// Navegación de secciones
+document.querySelectorAll('.menu a').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelectorAll('.menu a').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const target=btn.dataset.section;
+    document.querySelectorAll('.section-content').forEach(sec=>sec.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+  });
+});
+
+// Datos simulados
+let users=[
+  {id:1,name:"Juan Pérez",email:"juan@mail.com",role:"Admin"},
+  {id:2,name:"Ana Gómez",email:"ana@mail.com",role:"Editor"},
+  {id:3,name:"Carlos López",email:"carlos@mail.com",role:"Cliente"}
+];
+let products=[
+  {id:1,name:"Producto A",price:"$50",stock:12},
+  {id:2,name:"Producto B",price:"$120",stock:5}
+];
+let orders=["Pedido #12345 - Completado","Pedido #12346 - Pendiente","Pedido #12347 - Cancelado"];
+
+// Renderizar datos
+function renderUsers(){
+  const tbody=document.querySelector('#userTable tbody');
+  tbody.innerHTML="";
+  users.forEach(u=>{
+    tbody.innerHTML+=`<tr>
+    <td>${u.id}</td><td>${u.name}</td><td>${u.email}</td><td>${u.role}</td>
+    <td><button class='btn btn-ghost' onclick='editUser(${u.id})'>Editar</button>
+    <button class='btn btn-primary' onclick='deleteUser(${u.id})'>Eliminar</button></td></tr>`;
+  });
+}
+function renderProducts(){
+  const list=document.getElementById('productList');
+  list.innerHTML=products.map(p=>`<div class="card" style="margin-bottom:10px;">
+  <b>${p.name}</b> - ${p.price} (${p.stock} en stock)</div>`).join('');
+}
+function renderOrders(){
+  const list=document.getElementById('orderList');
+  list.innerHTML=orders.map(o=>`<li>${o}</li>`).join('');
+}
+
+// Modales
+function openModal(id){document.getElementById(id).style.display='flex';}
+function closeModal(id){document.getElementById(id).style.display='none';}
+
+// Agregar Usuario
+function addUser(){
+  const name=document.getElementById('userName').value;
+  const email=document.getElementById('userEmail').value;
+  const role=document.getElementById('userRole').value;
+  if(name && email){
+    users.push({id:users.length+1,name,email,role});
+    renderUsers();
+    closeModal('userModal');
+    document.getElementById('userName').value="";
+    document.getElementById('userEmail').value="";
+  }else alert("Complete todos los campos");
+}
+function editUser(id){alert("Editar usuario ID "+id);}
+function deleteUser(id){
+  if(confirm("¿Eliminar usuario ID "+id+"?")){
+    users=users.filter(u=>u.id!==id);
+    renderUsers();
+  }
+}
+// Agregar Producto
+function addProduct(){
+  const name=document.getElementById('productName').value;
+  const price=document.getElementById('productPrice').value;
+  const stock=document.getElementById('productStock').value;
+  if(name && price && stock){
+    products.push({id:products.length+1,name,price,stock});
+    renderProducts();
+    closeModal('productModal');
+  }else alert("Complete todos los campos");
+}
+
+renderUsers();
+renderProducts();
+renderOrders();
+</script>
+
 </body>
 </html>
