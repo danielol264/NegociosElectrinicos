@@ -16,11 +16,12 @@ if (categoria) {
         card.classList.add("category-card");
 
         card.innerHTML = `
-            <img src="${item.img || 'img/default.png'}" alt="${item.brand}">
-            <span>${item.model}</span>
-            <p>Precio: $${item.price}</p>
-            <button class="add-to-cart">Agregar</button>
-        `;
+    <img src="${item.img || 'img/default.png'}" alt="${item.brand}">
+    <span>${item.model}</span>
+    <p data-price="${item.price}">Precio: $${item.price}</p>
+    <button class="add-to-cart">Agregar</button>
+`;
+
 
         contenedor.appendChild(card);
     });
@@ -57,7 +58,7 @@ categories.forEach(category => {
     const button = category.querySelector('.add-to-cart');
     button.addEventListener('click', () => {
         const name = category.querySelector('span').textContent;
-        const price = parseFloat(category.getAttribute('data-price'));
+const price = parseFloat(category.querySelector('p').dataset.price);
         if (cart[name]) {
             cart[name].quantity += 1;
         } else {
@@ -65,6 +66,13 @@ categories.forEach(category => {
         }
         updateCart();
     });
+});
+document.getElementById("checkout-btn").addEventListener("click", () => {
+    // Guardar el carrito en localStorage
+    localStorage.setItem("carrito", JSON.stringify(cart));
+
+    // Redirigir a la vista de pago
+    window.location.href = "pagar.html";
 });
 
 // Actualizar carrito

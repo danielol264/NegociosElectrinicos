@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sello Digital - The ByteShop</title>
+  <link rel="stylesheet" href="..\css\sello.css">
+</head>
+<body>
+  <main class="page">
+    <section class="demo">
+      <div class="seal" id="seal">
+        <div class="seal-ring outer"></div>
+        <div class="seal-ring inner"></div>
+
+        <div class="seal-content">
+          <div class="logo">
+            <!-- Puede reemplazarse por una imagen <img> si lo prefieres -->
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <rect x="1.5" y="1.5" width="21" height="21" rx="5" stroke="white" stroke-width="1.2" opacity="0.95"/>
+              <path d="M6 16 L10 8 L14 16" stroke="white" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="text">
+            <div class="title">THE BYTESHOP</div>
+            <div class="subtitle">Sello de Autenticidad</div>
+            <div class="meta">
+              <span class="id">ID: <strong>BYT-2025-0841</strong></span>
+              <span class="date">Emitido: <strong>2025-11-27</strong></span>
+            </div>
+          </div>
+
+          <div class="signature">
+            <svg width="120" height="40" viewBox="0 0 120 40" aria-hidden>
+              <path d="M6 28 C26 10, 54 40, 74 18 C90 0, 120 20, 118 28" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="sign-name">Autorizado</div>
+          </div>
+        </div>
+
+        <!-- efecto holográfico -->
+        <div class="holo"></div>
+      </div>
+
+      <p class="note">Sello digital de ejemplo — diseño responsivo y listo para impresión.</p>
+      <div class="controls">
+        <button id="downloadBtn">Descargar (PNG)</button>
+        <button id="printBtn">Imprimir</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Pequeñas utilidades: descarga como PNG (usa html2canvas si quieres mejor compatibilidad).
+    // Aquí un método básico con SVG serialization para capturar el sello en PNG via <canvas>.
+    // NOTA: para producción, recomiendo usar html2canvas o exportar directamente a SVG/PNG en el servidor.
+
+    const downloadBtn = document.getElementById('downloadBtn');
+    const printBtn = document.getElementById('printBtn');
+    const seal = document.getElementById('seal');
+
+    downloadBtn.addEventListener('click', async () => {
+      // Usamos html2canvas si está disponible en el proyecto; si no, aviso.
+      if (typeof html2canvas === 'function') {
+        const canvas = await html2canvas(seal, { backgroundColor: null, scale: 3 });
+        const dataURL = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = 'sello-digital.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        alert('Para descargar como imagen instala/añade html2canvas o implementa la captura en backend. (La vista del sello se puede capturar con herramientas del navegador).');
+      }
+    });
+
+    printBtn.addEventListener('click', () => {
+      window.print();
+    });
+  </script>
+</body>
+</html>

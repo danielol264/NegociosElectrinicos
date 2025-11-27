@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado del Pago</title>
+    <link rel="stylesheet" href="../css/statuspago.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Estado del Pedido</h1>
+    <p class="sub">Gracias por tu compra. A continuación se muestra el progreso del pago.</p>
+
+    <!-- SECCIÓN DE DONACIÓN -->
+    <div class="donacion-box">
+        <h3>¿Deseas donar?</h3>
+        <p>Agrega un porcentaje para ayudar a nuestro programa social.</p>
+
+        <div class="donacion-opciones">
+            <button class="don-btn" data-porc="5">Donar 5%</button>
+            <button class="don-btn" data-porc="10">Donar 10%</button>
+            <button class="don-btn" data-porc="15">Donar 15%</button>
+        </div>
+
+        <div class="donacion-input">
+            <label>Otro monto:</label>
+            <input type="number" id="donacion-manual" placeholder="$0.00">
+            <button id="aplicar-manual">Aplicar</button>
+        </div>
+
+        <p id="donacion-total" class="donacion-total"></p>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+        <div class="step" id="step1">
+            <div class="icon"></div>
+            <p>Pedido recibido</p>
+        </div>
+
+        <div class="line" id="line1"></div>
+
+        <div class="step" id="step2">
+            <div class="icon"></div>
+            <p>Verificando pago</p>
+        </div>
+
+        <div class="line" id="line2"></div>
+
+        <div class="step" id="step3">
+            <div class="icon"></div>
+            <p id="step3-text">Pago aprobado</p>
+        </div>
+    </div>
+
+    <!-- Botones de simulación -->
+    <div class="btn-group">
+        <button class="btn success" id="btn-aprobado">Pago aprobado</button>
+        <button class="btn danger" id="btn-rechazado">Pago rechazado</button>
+        <button class="btn warning" id="btn-vencido">Pago vencido</button>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <button id="btn-regresar" class="btn back" style="display:none;">
+        Volver al carrito
+    </button>
+</div>
+
+<script src="../js/statuspago.js"></script>
+</body>
+</html>

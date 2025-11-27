@@ -36,3 +36,7 @@ categories.forEach(category => {
         updateCart();
     });
 });
+function categoria (categorias){
+    window.localStorage.setItem("categoria", categorias);
+    window.location.href = "src/views/categorias.html";
+}
