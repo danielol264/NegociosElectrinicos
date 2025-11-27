@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pago en Cajero</title>
+<style>
+body{
+    background:#eef2f7;
+    font-family:Arial;
+    padding:20px;
+}
+.card{
+    max-width:420px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+.ticket{
+    margin-top:20px;
+    padding:15px;
+    background:#fffef2;
+    border:1px dashed #bbb;
+    border-radius:10px;
+    font-size:14px;
+}
+.img{
+    width:100%;
+    border-radius:10px;
+}
+.btn{
+    display:block;
+    margin-top:15px;
+    background:#008cff;
+    color:white;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+}
+.error-box{
+    display:none;
+    background:#ffe5e5;
+    color:#b60000;
+    border:1px solid #ff8a8a;
+    padding:15px;
+    border-radius:10px;
+    margin-top:20px;
+    font-weight:bold;
+}
+.sim-btn{
+    width:100%;
+    padding:12px;
+    background:#c70000;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+    margin-top:10px;
+    cursor:pointer;
+}
+.sim-btn:hover{
+    background:#8b0000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Paga en un Cajero Automático</h2>
+    <p>Para completar este pago debes acudir a un cajero automático.  
+    Este proceso se simula en este sitio.</p>
+
+    <img class="img" src="../img/ticket-monedero.png">
+
+    <!-- SIMULACIÓN DE ERRORES -->
+    <div id="errorBox" class="error-box"></div>
+
+    <button class="sim-btn" onclick="mostrarError('rechazada')">Simular tarjeta rechazada</button>
+    <button class="sim-btn" onclick="mostrarError('conexion')">Simular conexión fallida</button>
+    <button class="sim-btn" onclick="mostrarError('duplicado')">Simular pago duplicado</button>
+    <button class="sim-btn" onclick="mostrarError('fondos')">Simular fondos insuficientes</button>
+
+    <div class="ticket">
+        <h3>Ticket ATM</h3>
+        <p>Transacción: TRX-ATM-9912</p>
+        <p>Monto: $250.00</p>
+        <p>Estado: Pago recibido (simulado)</p>
+        <p>Fecha: 2025-01-12</p>
+    </div>
+
+    <a class="btn" href="confirmcion.html">Continuar</a>
+</div>
+
+<script>
+function mostrarError(tipo){
+    const cont = document.getElementById("errorBox");
+    let msg = "";
+
+    if(tipo === "rechazada"){
+        msg = "❌ Tarjeta rechazada: El banco no aprobó la operación.";
+    }
+    if(tipo === "conexion"){
+        msg = "⚠️ Error de conexión: No se pudo contactar con el servidor.";
+    }
+    if(tipo === "duplicado"){
+        msg = "❌ Operación duplicada: Este pago ya fue procesado.";
+    }
+    if(tipo === "fondos"){
+        msg = "💸 Fondos insuficientes: No tienes saldo para completar el pago.";
+    }
+
+    cont.innerHTML = msg;
+    cont.style.display = "block";
+}
+</script>
+
+</body>
+</html>

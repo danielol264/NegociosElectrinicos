@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pago - Información</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f3f3f3;
+    padding:20px;
+}
+.card{
+    max-width:420px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+input, select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-bottom:15px;
+}
+button{
+    width:100%;
+    padding:12px;
+    background:#008cff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{
+    background:#0070d1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Información de Pago</h2>
+
+    <form action="metodos.html">
+        <label>Nombre</label>
+        <input type="text" required>
+
+        <label>Correo</label>
+        <input type="email" required>
+
+        <label>Método de pago</label>
+        <select required>
+            <option value="">Seleccionar…</option>
+            <option>Monedero Digital</option>
+            <option>Cajero Automático</option>
+        </select>
+
+        <button type="submit">Continuar</button>
+    </form>
+    
+</div>
+
+</body>
+</html>

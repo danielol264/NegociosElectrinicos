@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura Electrónica (Simulación)</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .factura-container {
+            width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px #ccc;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .line {
+            height: 2px;
+            background: #333;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            padding: 12px 22px;
+            margin-top: 20px;
+            color: white;
+            border-radius: 7px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="factura-container">
+    <h1>Factura Electrónica (Simulación)</h1>
+    <div class="line"></div>
+
+    <table>
+        <tr>
+            <td><strong>Folio:</strong></td>
+            <td>FCT-001</td>
+        </tr>
+
+        <tr>
+            <td><strong>RFC Cliente:</strong></td>
+            <td>XAXX010101000</td>
+        </tr>
+
+        <tr>
+            <td><strong>RFC Negocio:</strong></td>
+            <td>DEMO123456XX0</td>
+        </tr>
+
+        <tr>
+            <td><strong>Fecha:</strong></td>
+            <td>2025-05-20</td>
+        </tr>
+
+        <tr>
+            <td><strong>Total:</strong></td>
+            <td>$499.00</td>
+        </tr>
+
+        <tr>
+            <td><strong>Uso CFDI (Simulado):</strong></td>
+            <td>G01 — Adquisición de mercancías</td>
+        </tr>
+    </table>
+
+    <div class="center">
+        <a class="btn" href="#" onclick="alert('Descarga simulada ')">
+            Descargar factura (simulado)
+        </a>
+
+        <br><br>
+
+        <a class="btn" style="background:#555;" href="../../index.html">
+            Regresar al catálogo
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
