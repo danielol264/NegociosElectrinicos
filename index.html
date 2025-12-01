@@ -22,10 +22,6 @@
     <nav>
         <ul>
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="#catalogo">Catálogo</a></li>
-            <li><a href="#carrito">Carrito</a></li>
-            <li><a href="#usuarios">Usuarios</a></li>
-            <li><a href="#pedidos">Arma tu PC Gamer</a></li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">&#9776;</a>
                 <ul class="dropdown-menu">
@@ -34,8 +30,7 @@
                 <li><a class="dropdown-item" href="src/views/landing_page.html">LandingPage</a></li>
                 <li><a class="dropdown-item" href="src/views/status.html">Status</a></li>
                 <li><a class="dropdown-item" href="src/views/dashboard.html">Dashboard</a></li>
-                <li><a class="dropdown-item" href="src/views/process_simulation.html">Procesos</a></li>
-                <li><a class="dropdown-item" href="src/views/pago.html">Pago</a></li>
+                <li><a class="dropdown-item" href="src/views/pago.html">pago</a></li>
 
 
                 </ul>
@@ -108,14 +103,21 @@ zz
 
 
         <!-- Modal -->
-<div class="cookie-modal-overlay" id="cookieModal">
-    <div class="cookie-modal">
-        <h2>Uso de Cookies</h2>
-        <p>
-            Este sitio utiliza cookies para mejorar tu experiencia de navegación.  
-            Al continuar, aceptas su uso conforme a nuestra política de privacidad.
-        </p>
-        <button class="cookie-btn" id="acceptCookies">Aceptar</button>
+<div id="miModal" class="modal">
+    <div class="modal-contenido">
+        <div class="modal-header">
+            <h3>Política de Cookies y Caché</h3>
+        </div>
+        
+        <div class="modal-body">
+            <p>Utilizamos cookies y tecnologías de almacenamiento local (caché) para mejorar tu experiencia de navegación, analizar el tráfico del sitio y personalizar el contenido.</p>
+            <p>Al hacer clic en **"Aceptar Todas"**, aceptas el uso de estas tecnologías. Puedes gestionar tus preferencias en **"Configurar"**.</p>
+        </div>
+        
+        <div class="modal-footer">
+            <button id="btnAjustarCookies" class="btn-secondary">Configurar</button>
+            <button id="btnAceptarCookies" class="btn-primary">Aceptar Todas</button>
+        </div>
     </div>
 </div>
 
@@ -284,21 +286,42 @@ zz
 </footer>
 <!-- ======= SCRIPT COOKIES ======= -->
 <script>
-    const modal = document.getElementById('cookieModal');
-    const acceptBtn = document.getElementById('acceptCookies');
+var modal = document.getElementById("miModal");
+var btnAceptarCookies = document.getElementById("btnAceptarCookies"); // Botón "Aceptar Todas"
+var btnAjustarCookies = document.getElementById("btnAjustarCookies"); // Botón "Configurar"
 
-    // Mostrar el modal si aún no se ha aceptado
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!localStorage.getItem('cookiesAccepted')) {
-        modal.classList.add('active');
-      }
-    });
+// --- APERTURA AUTOMÁTICA AL CARGAR LA PÁGINA ---
+window.onload = function() {
+    modal.style.display = "block";
+}
 
-    // Guardar aceptación
-    acceptBtn.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'true');
-      modal.classList.remove('active');
-  });
+// Lógica al hacer clic en "Aceptar Todas"
+btnAceptarCookies.onclick = function() {
+    // Aquí iría la lógica para configurar las cookies como aceptadas
+    // Por ejemplo: localStorage.setItem('cookies_aceptadas', 'true');
+    console.log("Cookies aceptadas. Puedes cargar los scripts de seguimiento.");
+    modal.style.display = "none";
+}
+
+// Lógica al hacer clic en "Configurar"
+btnAjustarCookies.onclick = function() {
+    // Aquí iría la lógica para mostrar una interfaz de configuración de cookies más detallada
+    console.log("Redirigiendo a la configuración de privacidad...");
+    // Por ahora, solo cerramos el modal o abrimos una sub-modal.
+    modal.style.display = "none";
+}
+
+// Modificación importante:
+// Mantenemos la lógica para que no se cierre si se hace clic fuera.
+// Esto es estándar en muchos avisos de cookies para forzar una decisión.
+window.onclick = function(event) {
+    if (event.target == modal) {
+        // Opcional: Puedes elegir si se cierra al hacer clic fuera (descomenta la línea de abajo si quieres que se cierre)
+        // modal.style.display = "none";
+        
+        // Lo dejamos en blanco para que NO se cierre al hacer clic fuera, forzando la interacción.
+    }
+}
 </script>
 
 </body>

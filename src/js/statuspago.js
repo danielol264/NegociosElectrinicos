@@ -9,6 +9,7 @@ const line2 = document.getElementById("line2");
 
 const mensaje = document.getElementById("mensaje");
 const btnRegresar = document.getElementById("btn-regresar");
+const btnproceso = document.getElementById("btn-proceso");
 const step3Text = document.getElementById("step3-text");
 
 // Siempre inicia así
@@ -40,6 +41,7 @@ document.getElementById("btn-aprobado").onclick = () => {
     mensaje.textContent = "El pago fue aprobado exitosamente.";
 
     btnRegresar.style.display = "block";
+    btnproceso.style.display = "block";
 };
 
 document.getElementById("btn-rechazado").onclick = () => {
@@ -57,6 +59,8 @@ document.getElementById("btn-rechazado").onclick = () => {
     mensaje.textContent = "El pago fue rechazado. Intenta nuevamente.";
 
     btnRegresar.style.display = "block";
+        btnproceso.style.display = "none";
+
 };
 
 document.getElementById("btn-vencido").onclick = () => {
@@ -72,11 +76,16 @@ document.getElementById("btn-vencido").onclick = () => {
     mensaje.textContent = "El pago venció antes de ser aprobado.";
 
     btnRegresar.style.display = "block";
+        btnproceso.style.display = "none";
+
 };
 
 btnRegresar.onclick = () => {
     window.location.href = "../views/pagar.html";
 };
+btnproceso.onclick = () => {
+    window.location.href = "../views/process_simulation.html";
+}
 
 
 /* ======== DONACIÓN ======== */

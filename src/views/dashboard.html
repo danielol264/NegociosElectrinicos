@@ -6,6 +6,44 @@
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="../css/dashboardadmin.css">
 <style>
+  /* Estilos para la línea de tiempo */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #e0e0e0;
+  text-align: center;
+  flex: 1;
+  transition: background-color 0.3s ease;
+}
+
+.timeline-item.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+}
+
+.timeline-item.active::before {
+  background-color: #007bff;
+}
 /* Incluyo el CSS directamente para que sea autónomo */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif;}
 :root{
@@ -93,6 +131,11 @@ main{flex:1;}
       <h2>Pedidos</h2>
       <p>Listado de pedidos simulados.</p>
       <ul id="orderList"></ul>
+      <section id="pedidos" class="section-content">
+    <h2>Pedidos</h2>
+    <p>Listado de pedidos simulados.</p>
+    <ul id="orderList"></ul>
+</section>
     </section>
 
     <section id="reportes" class="section-content">
@@ -179,7 +222,6 @@ let products=[
   {id:1,name:"Producto A",price:"$50",stock:12},
   {id:2,name:"Producto B",price:"$120",stock:5}
 ];
-let orders=["Pedido #12345 - Completado","Pedido #12346 - Pendiente","Pedido #12347 - Cancelado"];
 
 // Renderizar datos
 function renderUsers(){
@@ -236,6 +278,41 @@ function addProduct(){
     renderProducts();
     closeModal('productModal');
   }else alert("Complete todos los campos");
+}
+let orders = [
+  { id: 1, description: "Pedido #12345", status: "Pendiente" },
+  { id: 2, description: "Pedido #12346", status: "Pendiente" },
+  { id: 3, description: "Pedido #12347", status: "Enviado" }
+];
+
+// Función para renderizar la lista de pedidos
+function renderOrders() {
+  const list = document.getElementById('orderList');
+  list.innerHTML = orders.map(o => `
+    <li style="margin-bottom:20px; list-style-type: none;">
+      <b>${o.description}</b>
+      <div class="timeline" style="display:flex; align-items:center; margin-top:10px;">
+        <div class="timeline-item ${o.status === 'Pendiente' ? 'active' : ''}">Pendiente</div>
+        <div class="timeline-item ${o.status === 'En Proceso' ? 'active' : ''}">En Proceso</div>
+        <div class="timeline-item ${o.status === 'Enviado' ? 'active' : ''}">Enviado</div>
+        <div class="timeline-item ${o.status === 'Entregado' ? 'active' : ''}">Entregado</div>
+      </div>
+      <div style="margin-top:5px;">
+        ${o.status === "Pendiente" ? `<button class="btn btn-primary" onclick="updateStatus(${o.id}, 'En Proceso')">Iniciar Envío</button>` : ""}
+        ${o.status === "En Proceso" ? `<button class="btn btn-primary" onclick="updateStatus(${o.id}, 'Enviado')">Enviar</button>` : ""}
+        ${o.status === "Enviado" ? `<button class="btn btn-primary" onclick="updateStatus(${o.id}, 'Entregado')">Marcar como Entregado</button>` : ""}
+      </div>
+    </li>
+  `).join('');
+}
+
+// Función para actualizar el estado del pedido
+function updateStatus(orderId, newStatus) {
+  const order = orders.find(o => o.id === orderId);
+  if (order) {
+    order.status = newStatus;
+    renderOrders();
+  }
 }
 
 renderUsers();

@@ -11,6 +11,7 @@ const pagoDetalles = document.getElementById("pago-detalles");
 const confirmarBtn = document.getElementById("confirmar-btn");
 const volverBtn = document.getElementById("volver-btn");
 const confirmResult = document.getElementById("confirm-result");
+const v = metodoPago.value;
 
 // Rellenar resumen
 let total = 0;
@@ -114,6 +115,7 @@ metodoPago.addEventListener("change", () => {
             </div>
         `;
     }
+
 });
 
 // Volver a tienda
@@ -152,10 +154,15 @@ confirmarBtn.addEventListener("click", () => {
     // Limpiar carrito simulado
     localStorage.removeItem("carrito");
 
-    // Opcional: redirigir después de 2.2s a la página principal (comentado)
-    setTimeout(() => {
-        window.location.href = "statuspago.html";
-    }, 2200);
+    // Opcional: redirigir después de 2.2s a la página principal (comentado)    
+    if (metodoPago.value=="monedero"){
+            window.location.href = "pago-monedero.html";
+        }
+        else if (metodoPago.value=="cajero"){
+            window.location.href = "pago-cajero.html";
+        }
+        else{
+        window.location.href = "statuspago.html";}
 });
 
 // Helpers (simples)
